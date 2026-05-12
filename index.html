@@ -1,11 +1,27 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Mi primera pagina</title>
-</head>
 <body>
-  <h1>Hola mundo</h1>
-  <p>Mi pagina web gratis con GitHub Pages</p>
-</body>
-</html>
+<video id="video" width="640" height="480" autoplay></video>
+<button id="snap">Capture Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+<script>
+// Request camera permissions
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+        let video = document.getElementById('video');
+        video.srcObject = stream;
+        video.play();
+    })
+    .catch(err => {
+        console.error("Error accessing camera: " + err);
+    });
+
+// Capture image from video
+document.getElementById('snap').addEventListener('click', () => {
+    let canvas = document.getElementById('canvas');
+    let context = canvas.getContext('2d');
+    context.drawImage(video, 0, 0, 640, 480);
+});
+</scipt>
+  </body>
+  </html>
